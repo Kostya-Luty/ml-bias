@@ -25,7 +25,7 @@
 - [x] Pin versions once everything works: `pip freeze > requirements.txt`.
 
 ### 0.3 — Verify the install
-- [x] Run a one-line sanity check that imports `gymnasium`, makes `FetchReach-v3`, and prints the observation/action space.
+- [x] Run a one-line sanity check that imports `gymnasium`, makes `FetchReach-v4`, and prints the observation/action space.
 - [x] Confirm MuJoCo renders (or at least runs headless) without errors.
 - [x] If on a headless machine, set `MUJOCO_GL=egl` or `osmesa` and confirm rendering still initializes.
 

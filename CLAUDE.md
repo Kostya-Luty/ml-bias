@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Environment & Stack
 
-- **RL environment:** FetchReach-v3 (gymnasium-robotics) — sparse reward, goal-conditioned, 4D action space
+- **RL environment:** FetchReach-v4 (gymnasium-robotics) — sparse reward, goal-conditioned, 4D action space
 - **Algorithm:** SAC or TD3 + HER (HindsightExperienceReplay from stable-baselines3)
 - **Python:** venv at `venv/` — activate with `.\venv\Scripts\activate` (Windows)
 
@@ -35,17 +35,19 @@ python -m pytest envs/tests/
 tensorboard --logdir logs/
 ```
 
-## Planned Directory Structure
+## Directory Structure
 
 ```
-envs/                  # Gymnasium wrappers
-  systematic_bias_wrapper.py   # ActionWrapper with curriculum schedule
+envs/
+  systematic_bias_wrapper.py   # ActionWrapper with curriculum schedule (not yet created)
 training/
-  train.py             # Entry point: loads config, trains one agent, saves model
-evaluation/            # Eval loops and robustness curve scripts
-analysis/              # Aggregation scripts, plot generation
-configs/               # YAML configs for each training condition
-results/               # Saved models, keyed by condition+seed
+  train.py             # Trains one SAC+HER agent, saves to results/test1
+  watch.py             # Loads results/test1, renders live in MuJoCo viewer
+evaluation/
+  evaluate.py          # evaluate_policy(model_path, n_episodes, seed) -> float; __main__ uses results/test1
+analysis/              # Aggregation scripts, plot generation (not yet created)
+configs/               # YAML configs per training condition (not yet created)
+results/               # Saved models (test1.zip exists)
 logs/                  # TensorBoard event files
 ```
 
