@@ -13,16 +13,16 @@
 ## Phase 0 — Environment Setup
 
 ### 0.1 — Create an isolated Python environment
-- [ ] Install Python 3.10 or 3.11 (avoid 3.12+ initially; some RL deps lag).
-- [ ] Create a virtual environment: `python -m venv venv` then activate it.
-- [ ] Upgrade pip: `pip install --upgrade pip`.
+- [x] Install latest Python version
+- [x] Create a virtual environment: `python -m venv venv` then activate it.
+- [x] Upgrade pip: `pip install --upgrade pip`.
 
 ### 0.2 — Install the stack
-- [ ] `pip install mujoco`
-- [ ] `pip install gymnasium gymnasium-robotics`
-- [ ] `pip install stable-baselines3`
-- [ ] `pip install numpy matplotlib pandas tensorboard`
-- [ ] Pin versions once everything works: `pip freeze > requirements.txt`.
+- [x] `pip install mujoco`
+- [x] `pip install gymnasium gymnasium-robotics`
+- [x] `pip install stable-baselines3`
+- [x] `pip install numpy matplotlib pandas tensorboard`
+- [x] Pin versions once everything works: `pip freeze > requirements.txt`.
 
 ### 0.3 — Verify the install
 - [ ] Run a one-line sanity check that imports `gymnasium`, makes `FetchReach-v3`, and prints the observation/action space.
