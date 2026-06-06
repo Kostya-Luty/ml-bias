@@ -25,14 +25,14 @@
 - [x] Pin versions once everything works: `pip freeze > requirements.txt`.
 
 ### 0.3 — Verify the install
-- [ ] Run a one-line sanity check that imports `gymnasium`, makes `FetchReach-v3`, and prints the observation/action space.
-- [ ] Confirm MuJoCo renders (or at least runs headless) without errors.
-- [ ] If on a headless machine, set `MUJOCO_GL=egl` or `osmesa` and confirm rendering still initializes.
+- [x] Run a one-line sanity check that imports `gymnasium`, makes `FetchReach-v3`, and prints the observation/action space.
+- [x] Confirm MuJoCo renders (or at least runs headless) without errors.
+- [x] If on a headless machine, set `MUJOCO_GL=egl` or `osmesa` and confirm rendering still initializes.
 
 ### 0.4 — Set up the project skeleton
-- [ ] Create directories: `envs/`, `training/`, `evaluation/`, `analysis/`, `configs/`, `results/`, `logs/`.
-- [ ] Initialize a git repo. Add a `.gitignore` for `venv/`, `results/`, `logs/`, `__pycache__/`.
-- [ ] Create a `README.md` stub describing the project (you'll expand it later — it's the portfolio front door).
+- [x] Create directories: `envs/`, `training/`, `evaluation/`, `analysis/`, `configs/`, `results/`, `logs/`.
+- [x] Initialize a git repo. Add a `.gitignore` for `venv/`, `results/`, `logs/`, `__pycache__/`.
+- [x] Create a `README.md` stub describing the project (you'll expand it later — it's the portfolio front door).
 
 ---
 
