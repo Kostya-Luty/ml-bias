@@ -41,24 +41,24 @@
 The goal here is to confirm a standard agent trains and reaches high success on the clean task before touching perturbations.
 
 ### 1.1 — Understand the environment
-- [ ] Print and document the observation space (FetchReach returns a dict: `observation`, `achieved_goal`, `desired_goal`).
-- [ ] Print and document the action space (4D: 3 end-effector deltas + 1 gripper, gripper unused in Reach).
-- [ ] Note that FetchReach uses **sparse** rewards by default and is a **goal-conditioned** env — this matters for algorithm choice.
+- [x] Print and document the observation space (FetchReach returns a dict: `observation`, `achieved_goal`, `desired_goal`).
+- [x] Print and document the action space (4D: 3 end-effector deltas + 1 gripper, gripper unused in Reach).
+- [x] Note that FetchReach uses **sparse** rewards by default and is a **goal-conditioned** env — this matters for algorithm choice.
 
 ### 1.2 — Choose and configure the algorithm
-- [ ] Use **SAC** or **TD3** with **HER (Hindsight Experience Replay)** — the standard combo for sparse-reward goal-conditioned Fetch tasks. `stable-baselines3` supports `HerReplayBuffer`.
-- [ ] Start from known-good hyperparameters (SB3 Zoo has tuned configs for Fetch). Don't tune yet.
-- [ ] Set a fixed random seed for this first run so results are reproducible.
+- [x] Use **SAC** or **TD3** with **HER (Hindsight Experience Replay)** — the standard combo for sparse-reward goal-conditioned Fetch tasks. `stable-baselines3` supports `HerReplayBuffer`.
+- [x] Start from known-good hyperparameters (SB3 Zoo has tuned configs for Fetch). Don't tune yet.
+- [x] Set a fixed random seed for this first run so results are reproducible.
 
 ### 1.3 — Train the clean baseline
-- [ ] Write `training/train.py` that takes a config and trains one agent.
+- [x] Write `training/train.py` that takes a config and trains one agent.
 - [ ] Train until success rate plateaus (FetchReach is easy; expect near-100% success well before 1M steps).
 - [ ] Log to TensorBoard. Confirm the success-rate curve climbs and plateaus.
-- [ ] Save the trained model to `results/clean_baseline/`.
+- [x] Save the trained model to `results/test1` (smoke-test run; full baseline TBD).
 
 ### 1.4 — Define and verify the success metric
-- [ ] Confirm what "success" means: end-effector within a distance threshold of the goal (the env reports this via `info['is_success']`).
-- [ ] Write a quick evaluation loop that runs N=100 episodes and reports mean success rate. This is the function you'll reuse everywhere.
+- [x] Confirm what "success" means: end-effector within a distance threshold of the goal (the env reports this via `info['is_success']`).
+- [x] Write a quick evaluation loop that runs N=100 episodes and reports mean success rate (`evaluation/evaluate.py`). This is the function you'll reuse everywhere.
 
 **Phase 1 exit criterion:** a saved clean policy that achieves >95% success on unmodified FetchReach, and a reusable evaluation function.
 
