@@ -88,3 +88,6 @@ class SystematicBiasWrapper(gym.ActionWrapper):
     
     def set_global_step(self, step):
         self._global_step = step
+
+    def get_current_epsilon(self):
+        return self._current_epsilon()
