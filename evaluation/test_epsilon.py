@@ -15,13 +15,14 @@
 import argparse
 import csv
 import os
+import numpy as np
 import gymnasium as gym
 import gymnasium_robotics
 from stable_baselines3 import SAC
 from envs.systematic_bias_wrapper import SystematicBiasWrapper
 
 CSV_PATH = os.path.join(os.path.dirname(__file__), "epsilon.csv")
-CSV_FIELDS = ["epsilon", "seed", "n_episodes", "success_rate", "model"]
+CSV_FIELDS = ["epsilon", "seed", "n_episodes", "success_rate", "model", "_fixed_bias"]
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--epsilon", type=float, required=True, help="Fixed bias magnitude to apply during evaluation")
@@ -32,17 +33,20 @@ args = parser.parse_args()
 
 gym.register_envs(gymnasium_robotics)
 
-# Wrap the env with a fixed bias of exactly args.epsilon.
-# alpha=0 keeps epsilon constant at epsilon_max throughout — no ramp.
+# Wrap the env in fixed mode: the same bias vector is applied for every episode.
+# We sample it once here (seeded for reproducibility) from Uniform(-eps, +eps)
+# per action dimension, then assign it to _fixed_bias before the first reset.
 base = gym.make("FetchReach-v4")
-env = SystematicBiasWrapper(base, epsilon_max=args.epsilon, alpha=0, mode="curriculum")
-
+env = SystematicBiasWrapper(base, epsilon_max=args.epsilon, alpha=0, mode="fixed")
+rng = np.random.default_rng(args.seed)
 model = SAC.load(args.model, env=env)
 
 successes = []
 obs, _ = env.reset(seed=args.seed)
 
 for _ in range(args.n_episodes):
+    env._fixed_bias = rng.uniform(-args.epsilon, args.epsilon, size=env.action_space.shape)
+    obs, _ = env.reset()
     while True:
         action, _ = model.predict(obs, deterministic=True)
         obs, _, terminated, truncated, info = env.step(action)
@@ -68,4 +72,5 @@ with open(CSV_PATH, "a", newline="") as f:
         "n_episodes": args.n_episodes,
         "success_rate": success_rate,
         "model": args.model,
+        "_fixed_bias": env._fixed_bias
     })

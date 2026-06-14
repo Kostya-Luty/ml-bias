@@ -46,7 +46,8 @@ class SystematicBiasWrapper(gym.ActionWrapper):
     
     def action(self, act):
         # add this episode's systematic error
-        biased = act + self._bias
+        bias = self._bias if self._bias is not None else 0.0
+        biased = act + bias
 
         # keep the result within the environment's legal action range
         biased = np.clip(
