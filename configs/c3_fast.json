@@ -1,0 +1,13 @@
+{
+  "condition": "C3_fast",
+  "env": "FetchReach-v4",
+  "algorithm": "SAC+HER",
+  "mode": "curriculum",
+  "epsilon_max": 1.1,
+  "alpha": 4.4e-05,
+  "gate_success_rate": null,
+  "gate_patience": 0,
+  "total_timesteps": 100000,
+  "n_sampled_goal": 4,
+  "goal_selection_strategy": "future"
+}

@@ -52,8 +52,8 @@ The goal here is to confirm a standard agent trains and reaches high success on 
 
 ### 1.3 — Train the clean baseline
 - [x] Write `training/train.py` that takes a config and trains one agent.
-- [ ] Train until success rate plateaus (FetchReach is easy; expect near-100% success well before 1M steps).
-- [ ] Log to TensorBoard. Confirm the success-rate curve climbs and plateaus.
+- [x] Train until success rate plateaus (FetchReach is easy; expect near-100% success well before 1M steps).
+- [x] Log to TensorBoard. Confirm the success-rate curve climbs and plateaus.
 - [x] Save the trained model to `results/test1` (smoke-test run; full baseline TBD).
 
 ### 1.4 — Define and verify the success metric
@@ -69,34 +69,34 @@ The goal here is to confirm a standard agent trains and reaches high success on 
 This is the technical heart of the project. The bias injection lives in a Gymnasium wrapper so it's cleanly separable from the training code.
 
 ### 2.1 — Design the wrapper interface
-- [ ] Create `envs/systematic_bias_wrapper.py` subclassing `gymnasium.ActionWrapper`.
-- [ ] Constructor parameters: `epsilon_max`, `alpha` (rate), `schedule_type` (default linear), and a flag to enable/disable a fixed-bias evaluation mode.
-- [ ] The wrapper must track a global training-step counter so `ε(t)` can grow over time.
+- [x] Create `envs/systematic_bias_wrapper.py` subclassing `gymnasium.ActionWrapper`.
+- [x] Constructor parameters: `epsilon_max`, `alpha` (rate), `schedule_type` (default linear), and a flag to enable/disable a fixed-bias evaluation mode.
+- [x] The wrapper must track a global training-step counter so `ε(t)` can grow over time.
 
 ### 2.2 — Implement per-episode bias sampling
-- [ ] On each `reset()`, sample a new bias vector: `bias ~ Uniform(-ε(t), +ε(t))` per action dimension (or a single scalar magnitude with random direction — decide and document which; per-dimension is simpler to start).
-- [ ] Store the bias for the episode. Do **not** resample mid-episode (this is what makes it *systematic*, not noise).
+- [x] On each `reset()`, sample a new bias vector: `bias ~ Uniform(-ε(t), +ε(t))` per action dimension (or a single scalar magnitude with random direction — decide and document which; per-dimension is simpler to start).
+- [x] Store the bias for the episode. Do **not** resample mid-episode (this is what makes it *systematic*, not noise).
 
 ### 2.3 — Implement the action transformation
-- [ ] In `action(act)`, return `act + bias` (clipped to the valid action range).
-- [ ] Decide whether to apply bias to the gripper dimension (for Reach, irrelevant — document the choice).
+- [x] In `action(act)`, return `act + bias` (clipped to the valid action range).
+- [x] Decide whether to apply bias to the gripper dimension (for Reach, irrelevant — document the choice).
 
 ### 2.4 — Implement the schedule
-- [ ] `ε(t) = min(ε_max, α·t)` where `t` is the current global step.
-- [ ] Expose a method to set/advance the step counter from the training loop (SB3 callbacks can do this).
-- [ ] Add an "instant" mode (`ε(t) = ε_max` always) for the standard-DR baseline.
-- [ ] Add a "fixed bias" evaluation mode where the bias is set externally and never resampled — needed for the controlled test set in Phase 4.
+- [x] `ε(t) = min(ε_max, α·t)` where `t` is the current global step.
+- [x] Expose a method to set/advance the step counter from the training loop (SB3 callbacks can do this).
+- [x] Add an "instant" mode (`ε(t) = ε_max` always) for the standard-DR baseline.
+- [x] Add a "fixed bias" evaluation mode where the bias is set externally and never resampled — needed for the controlled test set in Phase 4.
 
 ### 2.5 — Unit-test the wrapper in isolation
-- [ ] Verify bias is constant within an episode and changes across episodes.
-- [ ] Verify `ε(t)` grows linearly and caps at `ε_max`.
-- [ ] Verify actions stay within bounds after biasing.
-- [ ] Verify instant mode and fixed-bias mode behave correctly.
-- [ ] Sanity check: with `ε_max = 0`, the wrapper is a no-op and reproduces the clean baseline exactly.
+- [x] Verify bias is constant within an episode and changes across episodes.
+- [x] Verify `ε(t)` grows linearly and caps at `ε_max`.
+- [x] Verify actions stay within bounds after biasing.
+- [x] Verify instant mode and fixed-bias mode behave correctly.
+- [x] Sanity check: with `ε_max = 0`, the wrapper is a no-op and reproduces the clean baseline exactly.
 
 ### 2.6 — Wire the step counter to training
-- [ ] Write an SB3 callback that pushes the current timestep into the wrapper every step (or every rollout) so the schedule advances.
-- [ ] Confirm via logging that `ε(t)` actually increases during a short training run.
+- [x] Write an SB3 callback that pushes the current timestep into the wrapper every step (or every rollout) so the schedule advances.
+- [x] Confirm via logging that `ε(t)` actually increases during a short training run.
 
 **Phase 2 exit criterion:** a tested wrapper that injects per-episode systematic bias on a linear schedule, with verified instant and fixed-bias modes, and an `ε_max=0` no-op that matches the clean baseline.
 
@@ -105,8 +105,8 @@ This is the technical heart of the project. The bias injection lives in a Gymnas
 ## Phase 3 — Run the Training Conditions
 
 ### 3.1 — Choose ε_max
-- [ ] Pick `ε_max` by experiment: find the bias magnitude that drops the clean policy's success rate to roughly 40–60% (enough headroom to show improvement, not so much the task is impossible).
-- [ ] Do this by evaluating the Phase 1 clean policy under several fixed biases and plotting success vs. bias magnitude. Document the chosen `ε_max`.
+- [x] Pick `ε_max` by experiment: find the bias magnitude that drops the clean policy's success rate to roughly 40–60% (enough headroom to show improvement, not so much the task is impossible).
+- [x] Do this by evaluating the Phase 1 clean policy under several fixed biases and plotting success vs. bias magnitude. Document the chosen `ε_max`.
 
 ### 3.2 — Define the condition matrix
 - [ ] **C0 — Clean baseline:** `ε_max = 0` (already have from Phase 1).

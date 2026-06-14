@@ -1,0 +1,13 @@
+{
+  "condition": "C0_clean",
+  "env": "FetchReach-v4",
+  "algorithm": "SAC+HER",
+  "mode": "curriculum",
+  "epsilon_max": 0.0,
+  "alpha": 0.0,
+  "gate_success_rate": null,
+  "gate_patience": 0,
+  "total_timesteps": 100000,
+  "n_sampled_goal": 4,
+  "goal_selection_strategy": "future"
+}
