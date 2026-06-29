@@ -1,0 +1,16 @@
+{
+  "condition": "C1_slow",
+  "env": "FetchReach-v4",
+  "algorithm": "SAC+HER",
+  "mode": "curriculum",
+  "epsilon_max": 1.1,
+  "alpha": 1.4666666666666666e-05,
+  "gate_success_rate": null,
+  "gate_patience": 0,
+  "total_timesteps": 100000,
+  "n_sampled_goal": 4,
+  "goal_selection_strategy": "future",
+  "seed": 2,
+  "save_path": "results\\C1_slow\\seed2",
+  "eval_freq": 5000
+}

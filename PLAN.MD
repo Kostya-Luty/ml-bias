@@ -109,25 +109,25 @@ This is the technical heart of the project. The bias injection lives in a Gymnas
 - [x] Do this by evaluating the Phase 1 clean policy under several fixed biases and plotting success vs. bias magnitude. Document the chosen `ε_max`.
 
 ### 3.2 — Define the condition matrix
-- [ ] **C0 — Clean baseline:** `ε_max = 0` (already have from Phase 1).
-- [ ] **C1 — Slow curriculum:** small `α`.
-- [ ] **C2 — Medium curriculum:** moderate `α`.
-- [ ] **C3 — Fast curriculum:** large `α` (reaches `ε_max` early in training).
-- [ ] **C4 — Instant DR baseline:** `ε(t) = ε_max` from step 0.
-- [ ] Choose `α` values so that C1–C3 reach `ε_max` at roughly 25%, 50%, 75% of total training steps (clean, interpretable spacing).
+- [x] **C0 — Clean baseline:** `ε_max = 0` (already have from Phase 1).
+- [x] **C1 — Slow curriculum:** small `α`.
+- [x] **C2 — Medium curriculum:** moderate `α`.
+- [x] **C3 — Fast curriculum:** large `α` (reaches `ε_max` early in training).
+- [x] **C4 — Instant DR baseline:** `ε(t) = ε_max` from step 0.
+- [x] Choose `α` values so that C1–C3 reach `ε_max` at roughly 25%, 50%, 75% of total training steps (clean, interpretable spacing).
 
 ### 3.3 — Control for confounds
-- [ ] All conditions use identical hyperparameters, network architecture, total training steps, and algorithm.
-- [ ] The **only** differences are `ε_max` (C0 vs rest) and `α` (C1–C4).
-- [ ] Run each condition with **multiple seeds** (start with 3, ideally 5) — single-seed RL results are not trustworthy.
+- [x] All conditions use identical hyperparameters, network architecture, total training steps, and algorithm.
+- [x] The **only** differences are `ε_max` (C0 vs rest) and `α` (C1–C4).
+- [x] Run each condition with **multiple seeds** (start with 3, ideally 5) — single-seed RL results are not trustworthy.
 
 ### 3.4 — Probe for catastrophic forgetting during training
-- [ ] Add a periodic evaluation callback that, every K steps, evaluates the *current* policy on the **clean** env (bias off).
-- [ ] Log this clean-success curve alongside training. A mid-training dip is the forgetting signal — capture it whether or not it appears.
+- [x] Add a periodic evaluation callback that, every K steps, evaluates the *current* policy on the **clean** env (bias off).
+- [x] Log this clean-success curve alongside training. A mid-training dip is the forgetting signal — capture it whether or not it appears.
 
 ### 3.5 — Execute and log everything
-- [ ] Run all conditions × all seeds. Save each model and its full log.
-- [ ] Record config (all hyperparameters, `α`, `ε_max`, seed) alongside each run so results are reproducible.
+- [x] Run all conditions × all seeds. Save each model and its full log.
+- [x] Record config (all hyperparameters, `α`, `ε_max`, seed) alongside each run so results are reproducible.
 
 **Phase 3 exit criterion:** trained policies for every condition × seed, with clean-eval-during-training curves logged.
 

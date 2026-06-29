@@ -23,7 +23,7 @@ class SystematicBiasWrapper(gym.ActionWrapper):
 
         self._global_step = 0
         self._bias = None
-        self._fixed_bias = None
+        self._fixed_bias = None                      # must be set before reset() called if in fixed mode
         self._gate_open_step = None                  # step at which the gate opened; None until then
         self._success_streak = 0
 

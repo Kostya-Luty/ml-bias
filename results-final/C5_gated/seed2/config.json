@@ -1,0 +1,16 @@
+{
+  "condition": "C5_gated",
+  "env": "FetchReach-v4",
+  "algorithm": "SAC+HER",
+  "mode": "curriculum",
+  "epsilon_max": 1.1,
+  "alpha": 2.2e-05,
+  "gate_success_rate": 1.0,
+  "gate_patience": 20,
+  "total_timesteps": 100000,
+  "n_sampled_goal": 4,
+  "goal_selection_strategy": "future",
+  "seed": 2,
+  "save_path": "results\\C5_gated\\seed2",
+  "eval_freq": 5000
+}
